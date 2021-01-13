@@ -20,10 +20,7 @@ func NakedRoot(version string) *cobra.Command {
 	root.Version = version + "\n"
 	root.SilenceUsage = true
 	root.PersistentPreRunE = rootCmdPersistentPreRunE
-	root.PreRunE = func(cmd *cobra.Command, _ []string) error {
-		vip := cmd.Context().Value(viperCtxKey).(*viper.Viper)
-		return vip.BindPFlags(cmd.Flags())
-	}
+	root.PreRunE = bindCommandFlags
 	root.RunE = func(cmd *cobra.Command, args []string) error {
 		vip := cmd.Context().Value(viperCtxKey).(*viper.Viper)
 

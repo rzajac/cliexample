@@ -88,3 +88,9 @@ func annotate(cmd *cobra.Command, key, val string) {
 	}
 	cmd.Annotations[key] = val
 }
+
+// bindCommandFlags binds command flags to viper.
+func bindCommandFlags(cmd *cobra.Command, _ []string) error {
+	vip := cmd.Context().Value(viperCtxKey).(*viper.Viper)
+	return vip.BindPFlags(cmd.Flags())
+}

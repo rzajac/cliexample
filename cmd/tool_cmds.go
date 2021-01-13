@@ -46,10 +46,7 @@ func ToolAdd() *cobra.Command {
 	// Setup command.
 	cmd.Use = "add"
 	cmd.Short = "Add two numbers"
-	cmd.PreRunE = func(cmd *cobra.Command, _ []string) error {
-		vip := cmd.Context().Value(viperCtxKey).(*viper.Viper)
-		return vip.BindPFlags(cmd.Flags())
-	}
+	cmd.PreRunE = bindCommandFlags
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
 		vip := cmd.Context().Value(viperCtxKey).(*viper.Viper)
 
@@ -82,10 +79,7 @@ func ToolAddEnv() *cobra.Command {
 	// Setup command.
 	cmd.Use = "add-env"
 	cmd.Short = "Adds two numbers using arguments, env file or both"
-	cmd.PreRunE = func(cmd *cobra.Command, _ []string) error {
-		vip := cmd.Context().Value(viperCtxKey).(*viper.Viper)
-		return vip.BindPFlags(cmd.Flags())
-	}
+	cmd.PreRunE = bindCommandFlags
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
 		vip := cmd.Context().Value(viperCtxKey).(*viper.Viper)
 
